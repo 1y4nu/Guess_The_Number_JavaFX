@@ -6,7 +6,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage stage) {
-        Builder<Region> builder = new GuessTheNumberBuilder();
+        //Builder<Region> builder = new GuessTheNumberBuilder();
+        Builder<Region> builder = new GameBuilder();
         Region region = builder.build();
 
         Scene scene = new Scene(region,300, 300);

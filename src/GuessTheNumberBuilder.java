@@ -19,7 +19,7 @@ public class GuessTheNumberBuilder implements Builder<Region> {
         welcomePane.setAlignment(Pos.CENTER);
         pane.add(welcomePane,0,4);
 
-        Label input = new Label("Please Enter a number to begin");
+        Label input = new Label("Please Enter the Maximum Number");
         TilePane inputPane = new TilePane(input);
         inputPane.setAlignment(Pos.CENTER);
         pane.add(inputPane,0,5);
