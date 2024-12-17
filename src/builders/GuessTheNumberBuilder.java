@@ -1,5 +1,6 @@
 package builders;
 
+import controllers.GuessTheNumberController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,17 +9,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.Node;
-import java.util.Random;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class GuessTheNumberBuilder implements Builder<Region> {
-    private TextField inputField;
-    private Random random = new Random();
-    public static int userIn;
 
+    private final GuessTheNumberController controller = new GuessTheNumberController();
+    private TextField inputField;
+    
     @Override
     public Region build() {
         GridPane pane = new GridPane(20,20);
@@ -48,29 +46,9 @@ public class GuessTheNumberBuilder implements Builder<Region> {
 
     public Node beginButton() {
         Button begin = new Button("Begin");
-        begin.setOnAction(evt -> {
-            try {
-                userIn = Integer.parseInt(inputField.getText());
-                int randomNum = random.nextInt(userIn) + 1;
-                System.out.println(randomNum);
-                openGuessingWindow(randomNum);
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Invalid Input");
-            }
-        });
+        begin.setOnAction(evt -> controller.beginAction(inputField));
         return begin;
     }
 
-    private void openGuessingWindow(int randomNumber) {
-        Stage guessingStage = new Stage();
 
-        GameBuilder gameBuilder = new GameBuilder(randomNumber);
-        Region gameRegion = gameBuilder.build();
-
-        Scene scene = new Scene(gameRegion, 300, 200);
-        guessingStage.setTitle("Guess The Number");
-        guessingStage.setScene(scene);
-        guessingStage.show();
-    }
 }

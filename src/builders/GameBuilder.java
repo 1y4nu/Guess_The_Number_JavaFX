@@ -15,9 +15,11 @@ public class GameBuilder implements Builder<Region> {
     private Label currentPosition;
     private TextField guessField;
     private int number;
+    private int noOfGuesses;
 
     public  GameBuilder(int number) {
         this.number = number;
+        noOfGuesses = 0;
     }
 
     @Override
@@ -45,12 +47,18 @@ public class GameBuilder implements Builder<Region> {
         guessButton.setOnAction(evt -> {
             try {
                 int guessInput = Integer.parseInt(guessField.getText());
-                if (guessInput < number)
+                if (guessInput < number) {
+                    noOfGuesses++;
                     currentPosition.setText("Guess Higher!");
-                else if (guessInput > number)
+                }
+                else if (guessInput > number) {
+                    noOfGuesses++;
                     currentPosition.setText("Guess Lower!");
-                else
+                }
+                else {
+                    noOfGuesses++;
                     openWinWindow();
+                }
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid Input");
@@ -61,7 +69,7 @@ public class GameBuilder implements Builder<Region> {
 
     private void openWinWindow() {
         Stage winStage = new Stage();
-        WinBuilder winBuilder = new WinBuilder();
+        WinBuilder winBuilder = new WinBuilder(noOfGuesses);
         Region winRegion = winBuilder.build();
         Scene scene = new Scene(winRegion,200,200);
         winStage.setTitle("Congratulations");
