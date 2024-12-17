@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import java.util.Random;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class GuessTheNumberBuilder implements Builder<Region> {
     private TextField inputField;
@@ -21,6 +23,7 @@ public class GuessTheNumberBuilder implements Builder<Region> {
     public Region build() {
         GridPane pane = new GridPane(20,20);
         Label welcome = new Label("Welcome to the Number Guessing Game!");
+        welcome.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         TilePane welcomePane = new TilePane(welcome);
         welcomePane.setAlignment(Pos.CENTER);
         pane.add(welcomePane,0,4);
@@ -62,7 +65,6 @@ public class GuessTheNumberBuilder implements Builder<Region> {
     private void openGuessingWindow(int randomNumber) {
         Stage guessingStage = new Stage();
 
-        // Use GameBuilder to build the second window
         GameBuilder gameBuilder = new GameBuilder(randomNumber);
         Region gameRegion = gameBuilder.build();
 

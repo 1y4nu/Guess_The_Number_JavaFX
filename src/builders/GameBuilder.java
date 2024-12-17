@@ -1,6 +1,7 @@
 package builders;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -8,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 
 public class GameBuilder implements Builder<Region> {
     private Label currentPosition;
@@ -48,12 +50,22 @@ public class GameBuilder implements Builder<Region> {
                 else if (guessInput > number)
                     currentPosition.setText("Guess Lower!");
                 else
-                    currentPosition.setText("You Guessed The Number!");
+                    openWinWindow();
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid Input");
             }
         });
         return guessButton;
+    }
+
+    private void openWinWindow() {
+        Stage winStage = new Stage();
+        WinBuilder winBuilder = new WinBuilder();
+        Region winRegion = winBuilder.build();
+        Scene scene = new Scene(winRegion,200,200);
+        winStage.setTitle("Congratulations");
+        winStage.setScene(scene);
+        winStage.show();
     }
 }

@@ -9,10 +9,9 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         Builder<Region> builder = new GuessTheNumberBuilder();
-        //Builder<Region> builder = new GameBuilder();
         Region region = builder.build();
 
-        Scene scene = new Scene(region,300, 300);
+        Scene scene = new Scene(region,500, 300);
         stage.setTitle("Guess The Number");
         stage.setScene(scene);
         stage.show();
