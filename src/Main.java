@@ -1,6 +1,5 @@
-import buiders.Builder;
-import buiders.GameBuilder;
-import buiders.GuessTheNumberBuilder;
+import builders.Builder;
+import builders.GuessTheNumberBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
