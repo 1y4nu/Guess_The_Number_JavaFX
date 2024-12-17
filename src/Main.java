@@ -1,3 +1,6 @@
+import buiders.Builder;
+import buiders.GameBuilder;
+import buiders.GuessTheNumberBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -6,8 +9,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage stage) {
-        //Builder<Region> builder = new GuessTheNumberBuilder();
-        Builder<Region> builder = new GameBuilder();
+        Builder<Region> builder = new GuessTheNumberBuilder();
+        //Builder<Region> builder = new GameBuilder();
         Region region = builder.build();
 
         Scene scene = new Scene(region,300, 300);
