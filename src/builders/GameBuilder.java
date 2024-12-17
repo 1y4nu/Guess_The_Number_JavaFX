@@ -1,7 +1,7 @@
 package builders;
 
+import controllers.GameController;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,17 +9,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.Node;
-import javafx.stage.Stage;
 
 public class GameBuilder implements Builder<Region> {
     private Label currentPosition;
     private TextField guessField;
+    private final GameController controller = new GameController();
     private int number;
-    private int noOfGuesses;
 
     public  GameBuilder(int number) {
         this.number = number;
-        noOfGuesses = 0;
     }
 
     @Override
@@ -44,36 +42,9 @@ public class GameBuilder implements Builder<Region> {
 
     public Node guessButton() {
         Button guessButton = new Button("Guess!");
-        guessButton.setOnAction(evt -> {
-            try {
-                int guessInput = Integer.parseInt(guessField.getText());
-                if (guessInput < number) {
-                    noOfGuesses++;
-                    currentPosition.setText("Guess Higher!");
-                }
-                else if (guessInput > number) {
-                    noOfGuesses++;
-                    currentPosition.setText("Guess Lower!");
-                }
-                else {
-                    noOfGuesses++;
-                    openWinWindow();
-                }
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Invalid Input");
-            }
-        });
+        guessButton.setOnAction(evt -> controller.guessAction(guessField, currentPosition, number));
         return guessButton;
     }
 
-    private void openWinWindow() {
-        Stage winStage = new Stage();
-        WinBuilder winBuilder = new WinBuilder(noOfGuesses);
-        Region winRegion = winBuilder.build();
-        Scene scene = new Scene(winRegion,200,200);
-        winStage.setTitle("Congratulations");
-        winStage.setScene(scene);
-        winStage.show();
-    }
+
 }

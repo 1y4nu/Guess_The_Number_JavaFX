@@ -16,7 +16,7 @@ public class GuessTheNumberBuilder implements Builder<Region> {
 
     private final GuessTheNumberController controller = new GuessTheNumberController();
     private TextField inputField;
-    
+
     @Override
     public Region build() {
         GridPane pane = new GridPane(20,20);
